@@ -1,0 +1,113 @@
+{
+  "name": "npm-demo-ai-tasks",
+  "version": "1.0.0",
+  "description": "Complete npm demonstration with AI-powered task management",
+  "main": "src/server.js",
+  "scripts": {
+    "setup": "run-s setup:env setup:deps setup:db setup:ai",
+    "setup:env": "node scripts/setup-env.js",
+    "setup:deps": "npm install",
+    "setup:db": "node scripts/setup-database.js",
+    "setup:ai": "node scripts/setup-ai.js",
+    
+    "dev": "run-p dev:server dev:watch dev:ai",
+    "dev:server": "nodemon src/server.js",
+    "dev:watch": "chokidar 'src/**/*.js' -c 'npm run lint:fix'",
+    "dev:ai": "node src/ai/ai-service.js",
+    
+    "build": "run-s clean build:app build:docs",
+    "build:app": "webpack --mode production",
+    "build:docs": "jsdoc -c jsdoc.conf.json",
+    "clean": "rimraf dist docs coverage",
+    
+    "test": "run-s test:lint test:unit test:integration test:ai",
+    "test:lint": "eslint src/ --ext .js",
+    "test:unit": "jest --testPathPattern=unit",
+    "test:integration": "jest --testPathPattern=integration",
+    "test:ai": "jest --testPathPattern=ai",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    
+    "lint": "eslint src/ --ext .js",
+    "lint:fix": "eslint src/ --ext .js --fix",
+    "format": "prettier --write src/",
+    "format:check": "prettier --check src/",
+    
+    "ai:analyze": "node scripts/ai-analyze-tasks.js",
+    "ai:suggestions": "node scripts/ai-suggestions.js",
+    "ai:summarize": "node scripts/ai-summarize.js",
+    
+    "db:migrate": "node scripts/db-migrate.js",
+    "db:seed": "node scripts/db-seed.js",
+    "db:backup": "node scripts/db-backup.js",
+    "db:reset": "run-s db:backup db:migrate db:seed",
+    
+    "deploy": "run-s test build deploy:upload",
+    "deploy:upload": "node scripts/deploy.js",
+    "deploy:staging": "cross-env NODE_ENV=staging npm run deploy",
+    "deploy:production": "cross-env NODE_ENV=production npm run deploy",
+    
+    "start": "node src/server.js",
+    "start:prod": "cross-env NODE_ENV=production node src/server.js",
+    "start:debug": "node --inspect src/server.js",
+    
+    "logs": "node scripts/view-logs.js",
+    "monitor": "node scripts/monitor.js",
+    "health": "node scripts/health-check.js",
+    
+    "security": "run-p security:audit security:scan",
+    "security:audit": "npm audit",
+    "security:scan": "node scripts/security-scan.js",
+    
+    "performance": "node scripts/performance-test.js",
+    "benchmark": "node scripts/benchmark.js",
+    
+    "docs": "run-s docs:generate docs:serve",
+    "docs:generate": "jsdoc -c jsdoc.conf.json",
+    "docs:serve": "http-server docs -p 8080",
+    
+    "backup": "run-p db:backup logs:backup",
+    "logs:backup": "node scripts/backup-logs.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "sqlite3": "^5.1.6",
+    "uuid": "^9.0.1",
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "compression": "^1.7.4",
+    "rate-limiter-flexible": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "nodemon": "^3.0.2",
+    "jest": "^29.7.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.1.1",
+    "npm-run-all": "^4.1.5",
+    "cross-env": "^7.0.3",
+    "rimraf": "^5.0.5",
+    "chokidar-cli": "^3.0.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "jsdoc": "^4.0.2",
+    "http-server": "^14.1.1",
+    "supertest": "^6.3.3"
+  },
+  "keywords": [
+    "npm",
+    "demo",
+    "ai",
+    "task-management",
+    "nodejs",
+    "automation"
+  ],
+  "author": "npm Demo Project",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "taskAnalysis": {
+    "system": "You are an AI assistant specialized in analyzing tasks and providing insights.",
+    "template": "Analyze this task: {description}\n\nProvide insights on priority, complexity, and time estimation."
+  },
+  "suggestions": {
+    "system": "You are a productivity expert providing task management suggestions.",
+    "template": "Based on these tasks: {tasks}\n\nProvide suggestions for better productivity and organization."
+  },
+  "summary": {
+    "system": "You are an AI assistant that creates progress summaries.",
+    "template": "Summarize the progress for these tasks: {tasks}\n\nProvide insights and recommendations."
+  }
+}

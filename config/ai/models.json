@@ -1,0 +1,25 @@
+{
+  "default": {
+    "provider": "simulated",
+    "model": "demo-ai-v1",
+    "temperature": 0.7,
+    "maxTokens": 1000,
+    "enabled": true
+  },
+  "production": {
+    "provider": "openai",
+    "model": "gpt-3.5-turbo",
+    "temperature": 0.7,
+    "maxTokens": 1000,
+    "enabled": false,
+    "note": "Set OPENAI_API_KEY in .env to enable"
+  },
+  "alternative": {
+    "provider": "anthropic",
+    "model": "claude-3-sonnet",
+    "temperature": 0.7,
+    "maxTokens": 1000,
+    "enabled": false,
+    "note": "Set ANTHROPIC_API_KEY in .env to enable"
+  }
+}
